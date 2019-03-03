@@ -2,9 +2,9 @@
 
 namespace NotificationChannels\Jabber;
 
+use Fabiang\Xmpp\Client as JabberClient;
 use Fabiang\Xmpp\Options;
 use Illuminate\Support\ServiceProvider;
-use Fabiang\Xmpp\Client as JabberClient;
 
 class JabberServiceProvider extends ServiceProvider
 {
