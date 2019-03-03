@@ -3,21 +3,21 @@
 require 'vendor/autoload.php';
 error_reporting(-1);
 
+use Monolog\Logger;
 use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Options;
-use Fabiang\Xmpp\Protocol\Message;
-use Fabiang\Xmpp\Protocol\Presence;
 use Fabiang\Xmpp\Protocol\Roster;
+use Fabiang\Xmpp\Protocol\Message;
 use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
+use Fabiang\Xmpp\Protocol\Presence;
 
 $logger = new Logger('xmpp');
 $logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
 
-$hostname       = 'localhost';
-$port           = 5222;
+$hostname = 'localhost';
+$port = 5222;
 $connectionType = 'tcp';
-$address        = "$connectionType://$hostname:$port";
+$address = "$connectionType://$hostname:$port";
 
 $username = 'xmpp';
 $password = 'test';

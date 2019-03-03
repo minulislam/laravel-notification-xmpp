@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Jabber;
 
-use Fabiang\Xmpp\Client as JabberClient;
 use Fabiang\Xmpp\Options;
+use Psr\Log\LoggerInterface;
+use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
 use Fabiang\Xmpp\Protocol\Presence;
-use Fabiang\Xmpp\Protocol\Roster;
-use Psr\Log\LoggerInterface;
+use Fabiang\Xmpp\Client as JabberClient;
 
 class Jabber
 {
