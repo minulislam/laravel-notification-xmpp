@@ -70,14 +70,16 @@ class Jabber
         return $this->message()->setTo($jabberId);
     }
 
-    public function sendMessage()
+    public function sendMessage($params = [])
     {
+        $this->connect();
+
         return $this
             ->client()
             ->send($this
                     ->message()
-                    ->setMessage('test')
-                    ->setTo('nickname@myjabber.com'));
+                    ->setMessage($params['text'])
+                    ->setTo($params['chat_id']));
     }
 
     public function roster()
@@ -100,23 +102,27 @@ class Jabber
         return $this->client()->send($this->roster());
     }
 
-    public function joinChannel()
+    public function joinChannel($params = [])
     {
+        $this->connect();
+
         return $this->client()->send(
             $this->presence()
-                 ->setTo('channelname@conference.myjabber.com')
-                 ->setPassword('channelpassword')
+                 ->setTo($params['channel_name'])
+                 ->setPassword($params['channel_password'])
                  ->setNickName('mynick')
         );
     }
 
-    public function sendChannelMessage()
+    public function sendChannelMessage($params = [])
     {
-        $this->message()->setMessage('test')
-             ->setTo('channelname@conference.myjabber.com')
+        $this->connect();
+
+        $this->message()->setMessage($params['text'])
+             ->setTo($params['channel_name'])
              ->setType(Message::TYPE_GROUPCHAT);
-        $client->send($message);
-        $this->client()->send($this->message());
+
+        return  $this->client()->send($this->message());
     }
 
     public function connect()
