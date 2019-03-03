@@ -22,7 +22,6 @@ class JabberChannel
         $this->jabber = $jabber;
     }
 
-
     public function send($notifiable, Notification $notification)
     {
         $message = $notification->toJabber($notifiable);
@@ -30,14 +29,13 @@ class JabberChannel
             $message = JabberMessage::create($message);
         }
         if ($message->toNotGiven()) {
-            if (! $to = $notifiable->routeNotificationFor('jabber')) {
+            if (!$to = $notifiable->routeNotificationFor('jabber')) {
                 throw CouldNotSendNotification::chatIdNotProvided();
             }
             $message->to($to);
         }
         if (isset($message->content) && $message->to) {
-
-            $this->jabber->sendMessage($message->content,$message->to);
+            $this->jabber->sendMessage($message->content, $message->to);
         }
     }
 }
