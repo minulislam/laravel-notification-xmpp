@@ -46,7 +46,7 @@ class JabberChannel
             $message = JabberMessage::create($message);
         }
         if ($message->toNotGiven()) {
-            if (!$to = $notifiable->routeNotificationFor('jabber')) {
+            if (! $to = $notifiable->routeNotificationFor('jabber')) {
                 throw CouldNotSendNotification::chatIdNotProvided();
             }
             $message->to($to);

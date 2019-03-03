@@ -2,13 +2,13 @@
 
 namespace NotificationChannels\Jabber\Test;
 
-use Illuminate\Notifications\Notification;
 use Mockery;
-use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
+use Orchestra\Testbench\TestCase;
 use NotificationChannels\Jabber\Jabber;
+use Illuminate\Notifications\Notification;
 use NotificationChannels\Jabber\JabberChannel;
 use NotificationChannels\Jabber\JabberMessage;
-use Orchestra\Testbench\TestCase;
+use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
 
 class ChannelTest extends TestCase
 {

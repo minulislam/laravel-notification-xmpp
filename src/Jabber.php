@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Jabber;
 
-use Fabiang\Xmpp\Client as JabberClient;
 use Fabiang\Xmpp\Options;
+use Psr\Log\LoggerInterface;
+use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
 use Fabiang\Xmpp\Protocol\Presence;
-use Fabiang\Xmpp\Protocol\Roster;
-use Psr\Log\LoggerInterface;
+use Fabiang\Xmpp\Client as JabberClient;
 
 class Jabber
 {
@@ -70,7 +70,7 @@ class Jabber
         return $this->message()->setTo($jabberId);
     }
 
-    public function sendMessage($params=[])
+    public function sendMessage($params = [])
     {
         $this->connect();
 
@@ -102,7 +102,7 @@ class Jabber
         return $this->client()->send($this->roster());
     }
 
-    public function joinChannel($params=[])
+    public function joinChannel($params = [])
     {
         $this->connect();
 
@@ -114,7 +114,7 @@ class Jabber
         );
     }
 
-    public function sendChannelMessage($params=[])
+    public function sendChannelMessage($params = [])
     {
         $this->connect();
 
