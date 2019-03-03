@@ -2,18 +2,13 @@
 
 namespace NotificationChannels\Jabber;
 
-use Fabiang\Xmpp\Options;
-use Psr\Log\LoggerInterface;
-use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
-use Fabiang\Xmpp\Protocol\Presence;
-use Fabiang\Xmpp\Client as JabberClient;
-
 
 class Jabber
 {
- /** @var Client $client */
+    /** @var Client $client */
     protected $client;
+
     /**
      * Connect into xmpp network
      *
@@ -25,10 +20,12 @@ class Jabber
         $this->client = $client;
         $this->client->connect();
     }
+
     public function __destruct()
     {
         $this->client->disconnect();
     }
+
     /**
      * Send message to user (jid = jabber id (user@jabberhost.net))
      *
@@ -41,13 +38,4 @@ class Jabber
         $message->setMessage($messageText)->setTo($jid);
         $this->client->send($message);
     }
-
-
-
-
-
-
-
-
-
 }

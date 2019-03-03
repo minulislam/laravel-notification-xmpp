@@ -1,4 +1,5 @@
 <?php
+
 namespace NotificationChannels\Jabber;
 
 use Fabiang\Xmpp\Options;
@@ -6,7 +7,6 @@ use Illuminate\Support\ServiceProvider;
 
 class JabberServiceProvider extends ServiceProvider
 {
-
     public function boot()
     {
         /*    $this->app->bind(Jabber::class, function ($app) {
@@ -27,7 +27,8 @@ class JabberServiceProvider extends ServiceProvider
              ->give(function () {
                  $jabberConfig = config('services.jabber');
                  $options      = new Options($jabberConfig['address']);
-                 $options->setUsername($jabberConfig['username'])->setPassword($jabberConfig['password']);
+                 $options->setUsername($jabberConfig['username'])
+                 ->setPassword($jabberConfig['password']) ;
 
                  return new Jabber(
                      new Client(
@@ -42,6 +43,5 @@ class JabberServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }
