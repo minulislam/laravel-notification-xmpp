@@ -22,23 +22,6 @@ class JabberChannel
         $this->jabber = $jabber;
     }
 
-    /**
-     * Send the given notification.
-     *
-     * @param mixed                                  $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
-     * @throws \NotificationChannels\Jabber\Exceptions\CouldNotSendNotification
-     */
-    /*    public function send($notifiable, Notification $notification)
-        {
-            //$response = [a call to the api of your notification send]
-
-    //        if ($response->error) { // replace this by the code need to check for errors
-    //            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
-    //        }
-        }
-        */
     public function send($notifiable, Notification $notification)
     {
         $message = $notification->toJabber($notifiable);
@@ -46,14 +29,13 @@ class JabberChannel
             $message = JabberMessage::create($message);
         }
         if ($message->toNotGiven()) {
-            if (! $to = $notifiable->routeNotificationFor('jabber')) {
+            if (!$to = $notifiable->routeNotificationFor('jabber')) {
                 throw CouldNotSendNotification::chatIdNotProvided();
             }
             $message->to($to);
         }
-        if (isset($message->payload['text']) && $message->payload['text']) {
-            $params = $message->toArray();
-            $this->jabber->sendMessage($params);
+        if (isset($message->content) && $message->to) {
+            $this->jabber->sendMessage($message->content, $message->to);
         }
     }
 }
