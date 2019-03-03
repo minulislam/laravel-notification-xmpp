@@ -70,7 +70,7 @@ class Jabber
         return $this->message()->setTo($jabberId);
     }
 
-    public function sendMessage($params)
+    public function sendMessage($params=[])
     {
         $this->connect();
 
@@ -102,7 +102,7 @@ class Jabber
         return $this->client()->send($this->roster());
     }
 
-    public function joinChannel()
+    public function joinChannel($params=[])
     {
         $this->connect();
 
@@ -114,7 +114,7 @@ class Jabber
         );
     }
 
-    public function sendChannelMessage()
+    public function sendChannelMessage($params=[])
     {
         $this->connect();
 
