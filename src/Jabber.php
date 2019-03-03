@@ -2,12 +2,12 @@
 
 namespace NotificationChannels\Jabber;
 
+use Fabiang\Xmpp\Client as JabberClient;
 use Fabiang\Xmpp\Options;
-use Psr\Log\LoggerInterface;
-use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
 use Fabiang\Xmpp\Protocol\Presence;
-use Fabiang\Xmpp\Client as JabberClient;
+use Fabiang\Xmpp\Protocol\Roster;
+use Psr\Log\LoggerInterface;
 
 class Jabber
 {
@@ -70,14 +70,16 @@ class Jabber
         return $this->message()->setTo($jabberId);
     }
 
-    public function sendMessage()
+    public function sendMessage($params)
     {
+        $this->connect();
+
         return $this
             ->client()
             ->send($this
                     ->message()
-                    ->setMessage('test')
-                    ->setTo('nickname@myjabber.com'));
+                    ->setMessage($params['text'])
+                    ->setTo($params['chat_id']));
     }
 
     public function roster()
@@ -102,21 +104,25 @@ class Jabber
 
     public function joinChannel()
     {
+        $this->connect();
+
         return $this->client()->send(
             $this->presence()
-                 ->setTo('channelname@conference.myjabber.com')
-                 ->setPassword('channelpassword')
+                 ->setTo($params['channel_name'])
+                 ->setPassword($params['channel_password'])
                  ->setNickName('mynick')
         );
     }
 
     public function sendChannelMessage()
     {
-        $this->message()->setMessage('test')
-             ->setTo('channelname@conference.myjabber.com')
+        $this->connect();
+
+        $this->message()->setMessage($params['text'])
+             ->setTo($params['channel_name'])
              ->setType(Message::TYPE_GROUPCHAT);
-        $client->send($message);
-        $this->client()->send($this->message());
+
+        return  $this->client()->send($this->message());
     }
 
     public function connect()
