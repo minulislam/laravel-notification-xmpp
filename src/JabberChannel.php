@@ -8,15 +8,15 @@ use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
 class JabberChannel
 {
     /**
-    * @var Jabber
-    */
+     * @var Jabber
+     */
     protected $jabber;
 
     /**
-      * Channel constructor.
-      *
-      * @param Jabber $jabber
-      */
+     * Channel constructor.
+     *
+     * @param Jabber $jabber
+     */
     public function __construct(Jabber $jabber)
     {
         $this->jabber = $jabber;
@@ -46,7 +46,7 @@ class JabberChannel
             $message = JabberMessage::create($message);
         }
         if ($message->toNotGiven()) {
-            if (!$to = $notifiable->routeNotificationFor('jabber')) {
+            if (! $to = $notifiable->routeNotificationFor('jabber')) {
                 throw CouldNotSendNotification::chatIdNotProvided();
             }
             $message->to($to);

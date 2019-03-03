@@ -43,7 +43,7 @@ class JabberMessage
 
     public function toNotGiven()
     {
-        return !isset($this->payload['chat_id']);
+        return ! isset($this->payload['chat_id']);
     }
 
     public function toArray()
