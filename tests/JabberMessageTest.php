@@ -13,7 +13,6 @@ class JabberMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Laravel Notification Channels are awesome!', $message->payload['text']);
     }
 
-
     /** @test */
     public function the_recipients_chat_id_can_be_set()
     {
@@ -29,7 +28,6 @@ class JabberMessageTest extends \PHPUnit_Framework_TestCase
         $message->content('Laravel Notification Channels are awesome!');
         $this->assertEquals('Laravel Notification Channels are awesome!', $message->payload['text']);
     }
-
 
     /** @test */
     public function additional_options_can_be_set_for_the_message()
@@ -49,16 +47,16 @@ class JabberMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($message->toNotGiven());
     }
 
-        /** @test */
+    /** @test */
     public function it_can_return_the_payload_as_an_array()
     {
         $message = new JabberMessage('Laravel Notification Channels are awesome!');
         $message->to(12345);
         $message->options(['foo' => 'bar']);
         $expected = [
-            "text" => "Laravel Notification Channels are awesome!",
-            "chat_id" => 12345,
-            "foo" => "bar",
+            'text' => 'Laravel Notification Channels are awesome!',
+            'chat_id' => 12345,
+            'foo' => 'bar',
         ];
 
         $this->assertEquals($expected, $message->toArray());

@@ -2,11 +2,11 @@
 
 namespace NotificationChannels\Jabber\Test;
 
-use Mockery;
 use Illuminate\Notifications\Notification;
+use Mockery;
 use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
-use NotificationChannels\Jabber\JabberChannel;
 use NotificationChannels\Jabber\Jabber;
+use NotificationChannels\Jabber\JabberChannel;
 use NotificationChannels\Jabber\JabberMessage;
 use Orchestra\Testbench\TestCase;
 
@@ -18,7 +18,7 @@ class ChannelTest extends TestCase
     /** @var \NotificationChannels\Jabber\JabberChannel */
     protected $channel;
 
-   public function setUp()
+    public function setUp()
     {
         parent::setUp();
         $this->Jabber = Mockery::mock(Jabber::class);
@@ -41,12 +41,12 @@ class ChannelTest extends TestCase
         $this->setExpectedException(CouldNotSendNotification::class);
         $this->channel->send(new TestNotifiable(), new TestNotificationNoChatId());
     }
-
 }
 
 class TestNotifiable
 {
     use \Illuminate\Notifications\Notifiable;
+
     /**
      * @return int
      */

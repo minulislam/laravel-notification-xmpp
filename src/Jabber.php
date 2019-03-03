@@ -1,12 +1,13 @@
 <?php
+
 namespace NotificationChannels\Jabber;
 
+use Fabiang\Xmpp\Client as JabberClient;
 use Fabiang\Xmpp\Options;
-use Psr\Log\LoggerInterface;
-use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
 use Fabiang\Xmpp\Protocol\Presence;
-use Fabiang\Xmpp\Client as JabberClient;
+use Fabiang\Xmpp\Protocol\Roster;
+use Psr\Log\LoggerInterface;
 
 class Jabber
 {
@@ -117,11 +118,13 @@ class Jabber
         $client->send($message);
         $this->client()->send($this->message());
     }
+
     public function connect()
     {
         return $this->client()->connect();
     }
-        public function disConnect()
+
+    public function disConnect()
     {
         return $this->client()->disconnect();
     }

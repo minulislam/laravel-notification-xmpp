@@ -8,6 +8,7 @@ class CouldNotSendNotification extends \Exception
     {
         return new static('Descriptive error message.');
     }
+
     public static function chatIdNotProvided()
     {
         return new static('Jabber notification XMPP ID was not provided. Please refer usage docs.');
