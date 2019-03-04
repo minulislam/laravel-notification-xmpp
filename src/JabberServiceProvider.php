@@ -17,12 +17,8 @@ class JabberServiceProvider extends ServiceProvider
                  $options      = new Options($jabberConfig['address']);
                  $options->setUsername($jabberConfig['username'])
                  ->setPassword($jabberConfig['password']) ;
-
-                 return new Jabber(
-                     new JabberService(
-                         $options
-                     )
-                 );
+$client=new JabberService($options);
+                 return new Jabber($client);
              });
         /*  $this->app->when(JabberChannel::class)
               ->needs(Jabber::class)

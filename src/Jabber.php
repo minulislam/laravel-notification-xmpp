@@ -17,7 +17,7 @@ class Jabber
 
     public function __destruct()
     {
-        //  $this->client->disconnect();
+        $this->client->disconnect();
     }
 
     /**
