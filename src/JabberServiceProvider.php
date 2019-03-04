@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\Jabber;
 
+use Fabiang\Xmpp\Client as JabberService;
 use Fabiang\Xmpp\Options;
 use Illuminate\Support\ServiceProvider;
 
@@ -9,19 +10,67 @@ class JabberServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        /*    $this->app->bind(Jabber::class, function ($app) {
-            $config  = $app['config'];
-            $options = new Options($config->get('services.jabber.address'));
-            $options->setUsername($config->get('services.jabber.username'))
-                ->setPassword($config->get('services.jabber.password'));
+        $this->app->when(JabberChannel::class)
+             ->needs(Jabber::class)
+             ->give(function () {
+                 $jabberConfig = config('services.jabber');
+                 $options      = new Options($jabberConfig['address']);
+                 $options->setUsername($jabberConfig['username'])
+                 ->setPassword($jabberConfig['password']) ;
 
-            return new Jabber(
-                new Client(
-                    $options
-                )
-            );
+                 return new Jabber(
+                     new JabberService(
+                         $options
+                     )
+                 );
+             });
+        /*  $this->app->when(JabberChannel::class)
+              ->needs(Jabber::class)
+              ->give(function () {
+                  return new Jabber(
+                      $this->app->make(JabberService::class)
+                  );
+              });
+          $this->app->bind(JabberService::class, function () {
+              $config = $this->app['config']['services.jabber'];
+              $username = array_get($config, 'username');
+              $password = array_get($config, 'password');
+              $address = array_get($config, 'address');
+              $logger = $this->app['log'];
+              $options = new Options($address);
+              $options->setLogger($logger)
+                  ->setUsername($username)
+                  ->setPassword($password);
+
+              return  new JabberService($options);
+          });*/
+    }
+
+    public function register()
+    {
+        //$this->registerClient();
+    }
+
+    protected function registerClient()
+    {
+        $this->app->bind(JabberService::class, function ($app) {
+            $config = $app['config']['services.jabber'];
+            $username = array_get($config, 'username');
+            $password = array_get($config, 'password');
+            $address = array_get($config, 'address');
+            $logger = $app['log'];
+            $options = new Options($address);
+            $options->setLogger($logger)
+                ->setUsername($username)
+                ->setPassword($password);
+
+            return  new JabberService($options);
         });
- */
+    }
+
+    /*public function boot()
+    {
+
         $this->app->when(JabberChannel::class)
              ->needs(Jabber::class)
              ->give(function () {
@@ -36,12 +85,5 @@ class JabberServiceProvider extends ServiceProvider
                      )
                  );
              });
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
-    }
+    }*/
 }

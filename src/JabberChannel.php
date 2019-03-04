@@ -34,8 +34,10 @@ class JabberChannel
             }
             $message->to($to);
         }
-        if (isset($message->content) && $message->to) {
-            $this->jabber->sendMessage($message->content, $message->to);
+        if (isset($message->payload['text']) && $message->payload['chat_id']) {
+            return $this->jabber->sendMessage($message->payload['text'], $message->payload['chat_id']);
+        } else {
+            throw new \Exception('Error Processing Request', 1);
         }
     }
 }
