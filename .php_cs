@@ -92,12 +92,9 @@ $rules = [
 ];
 
 $finder = Finder::create()
-    ->notPath('storage')
     ->notPath('vendor')
     ->in(__DIR__)
     ->name('*.php')
-    ->notName('_ide_helper')
-    ->notName('*.blade.php')
     ->ignoreDotFiles(true)
     ->ignoreVCS(true);
 
@@ -105,21 +102,6 @@ return Config::create()
     ->setRules($rules)
     ->setUsingCache(false)
     ->setFinder($finder);
-
-$rulesMain = [
-    '@PSR2'                             => true,
-    'array_syntax'                      => ['syntax' => 'short'],
-    'ordered_imports'                   => ['sortAlgorithm' => 'alpha'],
-    'no_unused_imports'                 => true,
-    'no_useless_else'                   => true,
-    'no_useless_return'                 => true,
-    'trailing_comma_in_multiline_array' => true,
-    'no_superfluous_elseif'             => true,
-    'no_unneeded_curly_braces'          => true,
-    'phpdoc_order'                      => true,
-    'phpdoc_types_order'                => true,
-    'align_multiline_comment'           => true,
-];
 
 /*$mainRules = [
     'align_multiline_comment'                     => [
