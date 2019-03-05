@@ -13,4 +13,9 @@ class CouldNotSendNotification extends \Exception
     {
         return new static('Descriptive error message.');
     }
+
+    public static function invalidMessageObject($response)
+    {
+        return new static('Descriptive error message.');
+    }
 }
