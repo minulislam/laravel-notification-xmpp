@@ -1,4 +1,5 @@
 <?php
+
 namespace NotificationChannels\Jabber;
 
 use Exception;
@@ -17,12 +18,12 @@ class JabberChannel
     public function send($notifiable, Notification $notification)
     {
         try {
-            $to      = $this->getTo($notifiable);
+            $to = $this->getTo($notifiable);
             $message = $notification->toJabber($notifiable);
             if (is_string($message)) {
                 $message = JabberMessage::create($message);
             }
-            if (!$message instanceof JabberMessage) {
+            if (! $message instanceof JabberMessage) {
                 throw CouldNotSendNotification::invalidMessageObject($message);
             }
             if (isset($message->payload['text']) && $message->payload['chat_id']) {

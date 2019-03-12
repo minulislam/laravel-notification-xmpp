@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\Jabber\Test;
 
+use Mockery;
 use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Options;
-use Illuminate\Notifications\Notification;
-use Mockery;
-use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
+use Orchestra\Testbench\TestCase;
 use NotificationChannels\Jabber\Jabber;
+use Illuminate\Notifications\Notification;
 use NotificationChannels\Jabber\JabberChannel;
 use NotificationChannels\Jabber\JabberMessage;
-use Orchestra\Testbench\TestCase;
+use NotificationChannels\Jabber\Exceptions\CouldNotSendNotification;
 
 class ChannelTest extends TestCase
 {
@@ -31,13 +31,13 @@ class ChannelTest extends TestCase
         'password'   => 'exp9007',
     ];
 
-        $options      = new Options($jabberConfig['address']);
+        $options = new Options($jabberConfig['address']);
         $options->setUsername($jabberConfig['username'])
-                  ->setPassword($jabberConfig['password']) ;
-        $this->client=new Client($options);
+                  ->setPassword($jabberConfig['password']);
+        $this->client = new Client($options);
 
         $this->Jabber = Mockery::mock(Jabber::class);
-         //  $this->Jabber = new Jabber($this->client);
+        //  $this->Jabber = new Jabber($this->client);
         //  $this->client = Mockery::mock(Client::class);
 
         $this->channel = new JabberChannel($this->Jabber);
