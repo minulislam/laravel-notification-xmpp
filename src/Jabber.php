@@ -2,14 +2,15 @@
 
 namespace NotificationChannels\Jabber;
 
-use Fabiang\Xmpp\Client as JabberService;
+use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Protocol\Message;
 
 class Jabber
 {
+     /** @var Client */
     protected $client;
 
-    public function __construct(JabberService $client)
+    public function __construct(Client $client)
     {
         $this->client = $client;
         $this->client->connect();
@@ -17,7 +18,7 @@ class Jabber
 
     public function __destruct()
     {
-        $this->client->disconnect();
+      $this->client->disconnect();
     }
 
     /**

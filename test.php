@@ -37,6 +37,8 @@ $client = new Client($options);
 $client->connect();
 //$client->send(new Roster);
 //$client->send(new Presence);
-$client->send(new Message);
 
+$message = new Message();
+        $message->setMessage('itas jabber')->setTo('nopm@xmpp.jp');
+     $client->send($message);
 $client->disconnect();

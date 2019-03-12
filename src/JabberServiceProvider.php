@@ -47,7 +47,7 @@ class JabberServiceProvider extends ServiceProvider
         //$this->registerClient();
     }
 
-    protected function registerClient()
+    protected function registerJabberService()
     {
         $this->app->bind(JabberService::class, function ($app) {
             $config = $app['config']['services.jabber'];
