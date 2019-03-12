@@ -1,7 +1,7 @@
 {
-    "name": "laravel-notification-channels/jabber-notification",
+    "name": "minulislam/jabber-notification",
     "description": "laravel notification packages for jabber",
-    "homepage": "https://github.com/laravel-notification-channels/jabber-notification",
+    "homepage": "https://github.com/minulislam/jabber-notification",
     "license": "MIT",
     "authors": [
         {
@@ -12,15 +12,16 @@
         }
     ],
     "require": {
-        "php": ">=5.6.4",
+        "php": ">=7.1",
         "fabiang/xmpp": "^0.7.0",
         "guzzlehttp/guzzle": "^6.3",
         "illuminate/notifications": "^5.1|^5.2|^5.3|^5.4|^5.5|^5.6|^5.7",
         "illuminate/support": "^5.1|^5.2|^5.3|^5.4|^5.5|^5.6|^5.7"
     },
     "require-dev": {
+           "nunomaduro/larastan": "^0.3.15",
+        "phpunit/phpunit": "^7.0",
            "mockery/mockery": "^0.9.5",
-        "phpunit/phpunit": "5.*",
         "orchestra/testbench": "3.4.x-dev"
     },
     "autoload": {

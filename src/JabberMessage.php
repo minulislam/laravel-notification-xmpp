@@ -4,9 +4,7 @@ namespace NotificationChannels\Jabber;
 
 class JabberMessage
 {
-    protected $payload = [];
-    protected $content;
-    protected $to;
+    public $payload = [];
 
     public function __construct($content = '')
     {
@@ -20,14 +18,14 @@ class JabberMessage
 
     public function to($jabberId)
     {
-        $this->to = $jabberId;
+        $this->payload['chat_id'] = $jabberId;
 
         return $this;
     }
 
     public function content($content)
     {
-        $this->content = $content;
+        $this->payload['text'] = $content;
 
         return $this;
     }
@@ -41,6 +39,11 @@ class JabberMessage
 
     public function toNotGiven()
     {
-        return !isset($this->to);
+        return ! isset($this->payload['chat_id']);
+    }
+
+    public function toArray()
+    {
+        return $this->payload;
     }
 }

@@ -2,19 +2,14 @@
 
 namespace NotificationChannels\Jabber;
 
+use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Protocol\Message;
 
 class Jabber
 {
-    /** @var Client $client */
+    /** @var Client */
     protected $client;
 
-    /**
-     * Connect into xmpp network
-     *
-     * XmppBot constructor.
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -27,7 +22,7 @@ class Jabber
     }
 
     /**
-     * Send message to user (jid = jabber id (user@jabberhost.net))
+     * Send message to user (jid = jabber id (user@jabberhost.net)).
      *
      * @param string $messageText
      * @param string $jid
