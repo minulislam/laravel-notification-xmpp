@@ -18,14 +18,14 @@ class JabberMessage
 
     public function to($jabberId)
     {
-        $this->payload['chat_id']=$jabberId;
+        $this->payload['chat_id'] = $jabberId;
 
         return $this;
     }
 
     public function content($content)
     {
-        $this->payload['text']=$content;
+        $this->payload['text'] = $content;
 
         return $this;
     }
@@ -39,7 +39,7 @@ class JabberMessage
 
     public function toNotGiven()
     {
-        return !isset($this->payload['chat_id']);
+        return ! isset($this->payload['chat_id']);
     }
 
     public function toArray()

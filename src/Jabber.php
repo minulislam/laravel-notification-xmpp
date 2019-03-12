@@ -7,7 +7,7 @@ use Fabiang\Xmpp\Protocol\Message;
 
 class Jabber
 {
-     /** @var Client */
+    /** @var Client */
     protected $client;
 
     public function __construct(Client $client)
@@ -18,11 +18,11 @@ class Jabber
 
     public function __destruct()
     {
-      $this->client->disconnect();
+        $this->client->disconnect();
     }
 
     /**
-     * Send message to user (jid = jabber id (user@jabberhost.net))
+     * Send message to user (jid = jabber id (user@jabberhost.net)).
      *
      * @param string $messageText
      * @param string $jid
