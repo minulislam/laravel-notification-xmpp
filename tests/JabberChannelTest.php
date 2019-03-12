@@ -15,7 +15,6 @@ use Orchestra\Testbench\TestCase;
 class ChannelTest extends TestCase
 {
     /** @var Mockery\Mock */
-    protected $Jabberrr;
     protected $Jabber;
     /** @var \Fabiang\Xmpp\Client */
     protected $client;
@@ -25,15 +24,20 @@ class ChannelTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $jabberConfig = config('services.jabber');
-        dd($jabberConfig);
+        $jabberConfig = [
+        'address'       => 'tcp://xmpp.org.uk:5222',
+        'send-alias' => 'findsome987',
+        'username'   => 'findsome987',
+        'password'   => 'exp9007',
+    ];
+
         $options      = new Options($jabberConfig['address']);
         $options->setUsername($jabberConfig['username'])
                   ->setPassword($jabberConfig['password']) ;
         $this->client=new Client($options);
 
-        //   $this->Jabber = Mockery::mock(Jabber::class);
-        $this->Jabber = new Jabber($this->client);
+        $this->Jabber = Mockery::mock(Jabber::class);
+         //  $this->Jabber = new Jabber($this->client);
         //  $this->client = Mockery::mock(Client::class);
 
         $this->channel = new JabberChannel($this->Jabber);
