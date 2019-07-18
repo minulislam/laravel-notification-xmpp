@@ -3,13 +3,13 @@
 require 'vendor/autoload.php';
 error_reporting(-1);
 
-use Monolog\Logger;
 use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Options;
-use Fabiang\Xmpp\Protocol\Roster;
 use Fabiang\Xmpp\Protocol\Message;
-use Monolog\Handler\StreamHandler;
 use Fabiang\Xmpp\Protocol\Presence;
+use Fabiang\Xmpp\Protocol\Roster;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 $logger = new Logger('xmpp');
 $logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
@@ -35,8 +35,8 @@ $options->setLogger($logger)
 $client = new Client($options);
 
 $client->connect();
-//$client->send(new Roster);
-//$client->send(new Presence);
+ $client->send(new Roster);
+ $client->send(new Presence);
 
 $message = new Message();
         $message->setMessage('itas jabber')->setTo('nopm@xmpp.jp');
