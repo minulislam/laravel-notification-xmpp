@@ -2,7 +2,8 @@
 
 namespace NotificationChannels\Jabber;
 
-use Fabiang\Xmpp\Client as JabberService;
+// use Fabiang\Xmpp\Client as JabberService;
+use Fabiang\Xmpp\Client;
 use Fabiang\Xmpp\Options;
 use Illuminate\Support\ServiceProvider;
 
@@ -10,64 +11,60 @@ class JabberServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        /*   $this->app->when(JabberChannel::class)
-              ->needs(Jabber::class)
-              ->give(function () {
-                  $jabberConfig = config('services.jabber');
-                  $options      = new Options($jabberConfig['address']);
-                  $options->setUsername($jabberConfig['username'])
-                  ->setPassword($jabberConfig['password']) ;
-                  $client=new JabberService($options);
-                  return new Jabber($client);
-              });*/
+        /*
+
+                $this->app->when(JabberChannel::class)
+                     ->needs(Jabber::class)
+                     ->give(function () {
+                         $jabberConfig = config('services.jabber');
+                         $options      = new Options($jabberConfig['address']);
+                         $options->setUsername($jabberConfig['username'])
+                         ->setPassword($jabberConfig['password']) ;
+
+                         return new Jabber(
+                             new Client(
+                                 $options
+                             )
+                         );
+                     });
+         */
         $this->app->when(JabberChannel::class)
               ->needs(Jabber::class)
               ->give(function () {
                   return new Jabber(
-                      $this->app->make(JabberService::class)
+                      $this->app->make(Client::class)
                   );
               });
-        $this->registerJabberService();
     }
 
     public function register()
     {
-        //$this->registerJabberService();
+        $this->registerJabberService();
+        $this->bindJabber();
+    }
+
+    public function provides()
+    {
+        return ['jabber'];
     }
 
     protected function registerJabberService()
     {
-        $this->app->bind(JabberService::class, function () {
+        $this->app->bind(Client::class, function () {
             $config = $this->app['config']['services.jabber'];
-            $username = array_get($config, 'username');
-            $password = array_get($config, 'password');
-            $address = array_get($config, 'address');
             $logger = $this->app['log'];
-            $options = new Options($address);
-            $options->setLogger($logger)
-                  ->setUsername($username)
-                  ->setPassword($password);
+            $options = new Options($config['address']);
+            $options->setUsername($config['username'])
+                   ->setPassword($config['password']);
 
-            return  new JabberService($options);
+            return  new Client($options);
         });
     }
 
-    /*public function boot()
+    protected function registerJabber()
     {
-
-        $this->app->when(JabberChannel::class)
-             ->needs(Jabber::class)
-             ->give(function () {
-                 $jabberConfig = config('services.jabber');
-                 $options      = new Options($jabberConfig['address']);
-                 $options->setUsername($jabberConfig['username'])
-                 ->setPassword($jabberConfig['password']) ;
-
-                 return new Jabber(
-                     new Client(
-                         $options
-                     )
-                 );
-             });
-    }*/
+        $this->app->singleton('jabber', function ($app) {
+            return new Jabber($this->app->make(Client::class));
+        });
+    }
 }

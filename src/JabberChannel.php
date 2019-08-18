@@ -29,8 +29,8 @@ class JabberChannel
             if (!$message instanceof JabberMessage) {
                 throw CouldNotSendNotification::invalidMessageObject($message);
             }
-            if (isset($message->payload['text']) && $message->payload['chat_id']) {
-                return $this->jabber->sendMessage($message->payload['text'], $message->payload['chat_id']);
+            if (isset($message->payload['text']) && $message->payload['jid']) {
+                return $this->jabber->sendMessage($message->payload['text'], $message->payload['jid']);
             }
         } catch (Exception $exception) {
             throw CouldNotSendNotification::chatIdNotProvided($exception);
