@@ -40,7 +40,7 @@ class JabberServiceProvider extends ServiceProvider
     public function register()
     {
         $this->registerJabberService();
-        $this->bindJabber();
+        $this->registerJabber();
     }
 
     public function provides()
