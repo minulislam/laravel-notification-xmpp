@@ -2,11 +2,13 @@
 
 namespace NotificationChannels\Jabber\Test;
 
-class ExampleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
 {
-    /** @test */
-    public function true_is_true()
-    {
-        $this->assertTrue(true);
-    }
+  /** @test */
+  public function true_is_true()
+  {
+    $this->assertTrue(true);
+  }
 }
