@@ -44,8 +44,11 @@ class JabberServiceProvider extends ServiceProvider
         $this->app->bind(Jabber::class, static function () {
             $jabberConfig = config('services.jabber');
             $options      = new Options($jabberConfig['address']);
-            $options->setUsername($jabberConfig['username']);
-            $options->setPassword($jabberConfig['password']);
+            $logger = $this->app['log'];
+            $options->setLogger($logger)
+            ->setUsername($jabberConfig['username'])
+            ->setPassword($jabberConfig['password']);
+
             return new Jabber(
                 new Client(
                     $options

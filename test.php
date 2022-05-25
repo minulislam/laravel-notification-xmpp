@@ -13,19 +13,15 @@ use Monolog\Logger;
 
 $logger = new Logger('xmpp');
 $logger->pushHandler(new StreamHandler('php://stdout', Logger::DEBUG));
-$infos = [
-    'host'       => 'xmpp.org.uk',
-    'send-alias' => 'findsome987',
-    'username'   => 'findsome987',
-    'password'   => 'exp9007',
-];
-$hostname = 'xmpp.org.uk';
+
+
+$hostname = 'xmpp.is';
 $port = 5222;
 $connectionType = 'tcp';
 $address = "$connectionType://$hostname:$port";
 
-$username = 'findsome987';
-$password = 'exp9007';
+$username = 'findsome';
+$password = '!wGupK7aWJTD8K7';
 
 $options = new Options($address);
 $options->setLogger($logger)
@@ -39,6 +35,6 @@ $client->connect();
  $client->send(new Presence);
 
 $message = new Message();
-        $message->setMessage('itas jabber')->setTo('nopm@xmpp.jp');
+        $message->setMessage('itas jabber')->setTo('mr_x3o@xmpp.jp');
      $client->send($message);
 $client->disconnect();
