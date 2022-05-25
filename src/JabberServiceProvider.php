@@ -41,7 +41,7 @@ class JabberServiceProvider extends ServiceProvider
         */
     public function register(): void
     {
-        $this->app->bind(Jabber::class, static function () {
+        $this->app->bind(Jabber::class, function () {
             $jabberConfig = config('services.jabber');
             $options      = new Options($jabberConfig['address']);
             $logger = $this->app['log'];
