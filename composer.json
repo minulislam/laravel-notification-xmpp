@@ -46,7 +46,7 @@
                 "NotificationChannels\\Jabber\\JabberServiceProvider"
             ]
         }
-    }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
